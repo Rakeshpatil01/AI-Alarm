@@ -1,0 +1,81 @@
+#:kivy 2.0.0
+#:import math math
+
+
+<MyClockWidget>:
+    face: face
+    ticks: ticks
+    FloatLayout:
+        id: face
+        size_hint: None, None
+        pos_hint: {"center_x":0.5, "center_y":0.5}
+        size: 0.9*min(root.size), 0.9*min(root.size)
+        canvas:
+            Color:
+                rgb: 0.1, 0.1, 0.1
+            Ellipse:
+                size: self.size     
+                pos: self.pos
+        Label:
+            i: 1
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 2
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 3
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 4
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 5
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 6
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 7
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 8
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 9
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 10
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 11
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+        Label:
+            i: 12
+            text: str(self.i)
+            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+            font_size: self.height/16
+    Ticks:
+        id: ticks
+        r: min(root.size)*0.9/2
