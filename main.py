@@ -5,6 +5,7 @@ from kivy.uix.floatlayout import FloatLayout
 from math import cos, sin, pi
 from kivy.clock import Clock
 from kivy.lang import Builder
+from kivy.animation import Animation
 # from kivy.properties import NumericProperty
 
 import datetime
@@ -13,7 +14,12 @@ Builder.load_file('design.kv')
 
 
 class MyClockWidget(FloatLayout):
-    pass
+
+    def breath(self, *args):
+        anim = Animation(btn_size=(20, 20), t='in_quad', duration=.5) + \
+            Animation(btn_size=(70, 70), t='in_quad', duration=.5)
+        tgt = self.ids.cta
+        anim.start(tgt)
 
 
 class Ticks(Widget):
@@ -58,6 +64,7 @@ class MyClockApp(App):
     def build(self):
         clock = MyClockWidget()
         Clock.schedule_interval(clock.ticks.update_clock, 1)
+        Clock.schedule_interval(clock.breath, 1)
         return clock
 
 
