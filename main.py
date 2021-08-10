@@ -1,25 +1,20 @@
-from kivy.app import App
+import datetime
+from kivymd.app import MDApp
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line
-from kivy.uix.floatlayout import FloatLayout
+# from kivy.uix.floatlayout import FloatLayout
 from math import cos, sin, pi
 from kivy.clock import Clock
 from kivy.lang import Builder
-from kivy.animation import Animation
+# from kivy.animation import Animation
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.core.window import Window
+Window.size = (480, 800)
 # from kivy.properties import NumericProperty
 
-import datetime
 
-Builder.load_file('design.kv')
-
-
-class MyClockWidget(FloatLayout):
-
-    def breath(self, *args):
-        anim = Animation(btn_size=(20, 20), t='in_quad', duration=.5) + \
-            Animation(btn_size=(70, 70), t='in_quad', duration=.5)
-        tgt = self.ids.cta
-        anim.start(tgt)
+class MyClockWidget(Screen):
+    pass
 
 
 class Ticks(Widget):
@@ -60,11 +55,15 @@ class Ticks(Widget):
                 cap="round")
 
 
-class MyClockApp(App):
+Builder.load_file('design.kv')
+
+
+class MyClockApp(MDApp):
     def build(self):
+        screen_manager = ScreenManager()
+        screen_manager.add_widget(MyClockWidget(name="screen_one"))
         clock = MyClockWidget()
         Clock.schedule_interval(clock.ticks.update_clock, 1)
-        Clock.schedule_interval(clock.breath, 1)
         return clock
 
 

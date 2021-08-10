@@ -5,7 +5,7 @@
     id: float_root
     size_hint: (None,None)
     text:''
-    btn_size:(70,70)
+    btn_size: 0.45*min(root.size), 0.45*min(root.size)
     size:(70,70)
     bg_color:(0.404, 0.227,0.718,1.0)
     pos_hint: {'x': .5}
@@ -31,7 +31,7 @@
         id: face
         size_hint: None, None
         pos_hint: {"center_x":0.5, "center_y":0.5}
-        size: 0.95*min(root.size), 0.95*min(root.size)
+        size: 0.85*min(root.size), 0.85*min(root.size)
         canvas:
             Color:
                 rgb: 0.1, 0.1, 0.1
@@ -43,11 +43,6 @@
             text: str(self.i)
             pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
             font_size: self.height/16
-            Image:
-                source: "./IMG20190208213536.PNG"
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-                allow_stretch: True
         FloatButton:
             i: 2
             text: str(self.i)
@@ -109,7 +104,13 @@
         id: ticks
         r: min(root.size)*0.75/2
 
-    FloatButton:
-        id:cta
-        text: "Set Alarm"
-        pos_hint: {"center_x":0.5, "center_y":0.5}
+
+
+    MDBottomAppBar:
+        MDToolbar:
+            title:'set alarm'
+            left_action_items:[["clock"]]
+            mode: 'end'
+            type: 'bottom'
+            icon: "./IMG20190208213536.PNG"
+            
