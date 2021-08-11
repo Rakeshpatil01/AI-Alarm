@@ -1,116 +1,146 @@
-#:kivy 2.0.0
+#:kivy 1.0
 #:import math math
 
-<FloatButton@FloatLayout>:
-    id: float_root
-    size_hint: (None,None)
-    text:''
-    btn_size: 0.45*min(root.size), 0.45*min(root.size)
-    size:(70,70)
-    bg_color:(0.404, 0.227,0.718,1.0)
-    pos_hint: {'x': .5}
-    Button:
-        text: float_root.text
-        markup: True
-        size_hint:(None,None)
-        size: float_root.btn_size
-        pos_hint: {"center_x":0.5, "center_y":0.5}
-        #background_normal:''
-        background_color:(0,0,0,0)
-        canvas.before:
-            Color:
-                rgba: float_root.bg_color
-            Ellipse:
-                size: self.size
-                pos: self.pos
+<ContentNavigationDrawer>:
 
-<MyClockWidget>:
-    face: face
-    ticks: ticks
-    FloatLayout:
-        id: face
-        size_hint: None, None
-        pos_hint: {"center_x":0.5, "center_y":0.5}
-        size: 0.85*min(root.size), 0.85*min(root.size)
-        canvas:
-            Color:
-                rgb: 0.1, 0.1, 0.1
-            Ellipse:
-                size: self.size     
-                pos: self.pos
-        FloatButton:
-            i: 1
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 2
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 3
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 4
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 5
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 6
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 7
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 8
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 9
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 10
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 11
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        FloatButton:
-            i: 12
-            text: str(self.i)
-            pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-            font_size: self.height/16
-        
+    ScrollView:
 
-    Ticks:
-        id: ticks
-        r: min(root.size)*0.75/2
+        MDList:
 
+            OneLineListItem:
+                text: "Screen 1"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 1"
 
-
-    MDBottomAppBar:
-        MDToolbar:
-            title:'set alarm'
-            left_action_items:[["clock"]]
-            mode: 'end'
-            type: 'bottom'
-            icon: "./IMG20190208213536.PNG"
+            OneLineListItem:
+                text: "Screen 2"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 2"
             
+            OneLineListItem:
+                text: "Screen 3"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 3"
+
+
+
+
+
+MDScreen:
+
+    MDToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
+        elevation: 10
+        title: "MENU"
+        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+
+    MDNavigationLayout:
+        x: toolbar.height
+
+        ScreenManager:
+            id: screen_manager
+
+            MDScreen:
+                name: "scr 1"
+
+                MDLabel:
+                    text: "Screen 1"
+                    halign: "center"
+
+            MDScreen:
+                name: "scr 2"
+
+                MDLabel:
+                    text: "Screen 2"
+                    halign: "center"
+
+            ClockWidget:
+                name: "scr 3"
+                face: face
+                ticks: ticks
+                FloatLayout:
+                    id: face
+                    size_hint: None, None
+                    pos_hint: {"center_x":0.5, "center_y":0.5}
+                    size: 0.9*min(root.size), 0.9*min(root.size)
+                    canvas:
+                        Color:
+                            rgb: 0.1, 0.1, 0.1
+                        Ellipse:
+                            size: self.size     
+                            pos: self.pos
+                    Label:
+                        i: 1
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 2
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 3
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 4
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 5
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 6
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 7
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 8
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 9
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 10
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 11
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                    Label:
+                        i: 12
+                        text: str(self.i)
+                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
+                        font_size: self.height/16
+                Ticks:
+                    id: ticks
+                    r: min(root.size)*0.9/2
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
