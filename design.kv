@@ -1,6 +1,6 @@
 #:kivy 1.0
-#:import math math
-
+#:import Window kivy.core.window.Window
+#:import IconLeftWidget kivymd.uix.list.IconLeftWidget
 <ContentNavigationDrawer>:
 
     ScrollView:
@@ -8,135 +8,82 @@
         MDList:
 
             OneLineListItem:
-                text: "Screen 1"
+                text: "TimeClock"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr 1"
 
             OneLineListItem:
-                text: "Screen 2"
+                text: "Planner"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr 2"
-            
-            OneLineListItem:
-                text: "Screen 3"
-                on_press:
-                    root.nav_drawer.set_state("close")
-                    root.screen_manager.current = "scr 3"
 
+<ItemBackdropFrontLayer@ThreeLineAvatarListItem>
+    
+    ImageLeftWidget:
+        source: "F:\planner\IMG20190208213536.png"
 
+<MyBackdropFrontLayer@ItemBackdropFrontLayer>
+    backdrop: None
+    text: "Lower the front layer"
+    secondary_text: " by 50 %"
+    icon: "transfer-down"
+    on_press: root.backdrop.open(-Window.height / 2)
+    pos_hint: {"top": 1}
+    _no_ripple_effect: True        
 
 
 
 MDScreen:
 
-    MDToolbar:
-        id: toolbar
-        pos_hint: {"top": 1}
-        elevation: 10
-        title: "MENU"
-        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
-
     MDNavigationLayout:
-        x: toolbar.height
-
+        
         ScreenManager:
             id: screen_manager
-
             MDScreen:
                 name: "scr 1"
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        id: toolbar
+                        title: "Alarm"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                    MDTabs:
+                        Tab:
+                            text: "AnalogClock"
+                            MDBackdrop:
+                                MDBackdropBackLayer:
+                                    MDScreen:
+                                        MDCircularLayout:
+                                            id: ClockAlalrm
+                                            pos_hint: {"center_x": 1.0, "center_y": .6}
+                                            row_spacing: min(self.size)*0.1
+                                        Ticks:
+                                            id: ticks
+                                            pos_hint: {"center_x": 0.5, "center_y": 0.6}
+                                            r: min(root.size)*0.65/2
 
-                MDLabel:
-                    text: "Screen 1"
-                    halign: "center"
+                                MDBackdropFrontLayer:
+                                    MyBackdropFrontLayer:
+                                        
+
+
 
             MDScreen:
                 name: "scr 2"
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        id: toolbar
+                        title: "Alarm"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
 
-                MDLabel:
-                    text: "Screen 2"
-                    halign: "center"
-
-            ClockWidget:
-                name: "scr 3"
-                face: face
-                ticks: ticks
-                FloatLayout:
-                    id: face
-                    size_hint: None, None
-                    pos_hint: {"center_x":0.5, "center_y":0.5}
-                    size: 0.9*min(root.size), 0.9*min(root.size)
-                    canvas:
-                        Color:
-                            rgb: 0.1, 0.1, 0.1
-                        Ellipse:
-                            size: self.size     
-                            pos: self.pos
-                    Label:
-                        i: 1
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 2
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 3
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 4
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 5
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 6
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 7
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 8
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 9
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 10
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 11
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                    Label:
-                        i: 12
-                        text: str(self.i)
-                        pos_hint: {"center_x": 0.5+0.42*math.sin(math.pi/6*(self.i-12)), "center_y": 0.5+0.42*math.cos(math.pi/6*(self.i-12))}
-                        font_size: self.height/16
-                Ticks:
-                    id: ticks
-                    r: min(root.size)*0.9/2
-
+                    MDLabel:
+                        text: "Screen 2"
+                        halign: "center"
 
         MDNavigationDrawer:
             id: nav_drawer
@@ -144,3 +91,12 @@ MDScreen:
             ContentNavigationDrawer:
                 screen_manager: screen_manager
                 nav_drawer: nav_drawer
+
+<Tab>:
+
+    MDLabel:
+        halign: "center"
+        user_font_size: "48sp"
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+
